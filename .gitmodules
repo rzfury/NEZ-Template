@@ -1,0 +1,6 @@
+[submodule "Dependencies/Nez"]
+	path = Dependencies/Nez
+	url = https://github.com/prime31/Nez.git
+[submodule "Dependencies/FNA"]
+	path = Dependencies/FNA
+	url = https://github.com/FNA-XNA/FNA.git
