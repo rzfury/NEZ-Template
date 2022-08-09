@@ -1,56 +1,40 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
+﻿using RZGame.Core.ContentManagement;
+using RZGame.Core.Utilities;
+using RZGame.Scenes;
 
 namespace RZGame
 {
-    public class Game : Microsoft.Xna.Framework.Game
+    public class Game : Nez.Core
     {
-        public static Game Instance;
+		public static Game GameInstance;
 
-        private GraphicsDeviceManager _gdm;
-        private SpriteBatch _sb;
+		public ContentManager CM;
 
-        public Game() : base()
-        {
-            _gdm = new GraphicsDeviceManager(this)
-            {
-                PreferredBackBufferWidth = 1280,
-                PreferredBackBufferHeight = 720,
-                IsFullScreen = false
-            };
-            Instance = this;
-        }
+		public Game() : base()
+		{
+			GameInstance = this;
+			CM = new();
+		}
 
-        protected override void Initialize()
-        {
-            base.Initialize();
-        }
+		protected override void Initialize()
+		{
+			base.Initialize();
+
+			CM.AddAsset("REIMU_SPRITE.png", "root/textures", AssetType.Image);
+			CM.LoadAssets();
+
+			Scene = new SampleScene();
+		}
 
         protected override void LoadContent()
         {
             base.LoadContent();
-        }
-
-        protected override void UnloadContent()
-        {
-            base.UnloadContent();
-        }
-
-        protected override void OnExiting(object sender, EventArgs args)
-        {
-            base.OnExiting(sender, args);
-        }
-
-        protected override void Update(GameTime gameTime)
+		}
+        protected override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
             base.Update(gameTime);
-        }
 
-        protected override void Draw(GameTime gameTime)
-        {
-            base.Draw(gameTime);
-            _gdm.GraphicsDevice.Clear(Color.CornflowerBlue);
-        }
+			KeyboardHelper.GetState();
+		}
     }
 }
